@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Javascript</title>
+</head>
+<body>
+  <label>User Name:</label>
+  <input type ="text" id ="username">
+  <br>
+  <button onclick ="greetuser()">Greet user</button>
+  <script>
+    function greetuser()
+    {
+      var uname = document.getElementById("username").value;
+      document.write("good morning.........."+ uname);
+    }
+  </script>
+</body>
+</html>
