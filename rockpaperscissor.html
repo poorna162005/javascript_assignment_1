@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: #dff0d8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .choices {
+            display: none;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .choices button {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            font-size: 40px;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid #000;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .scores {
+            margin: 20px 0;
+        }
+        .scores div {
+            margin: 10px 0;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .play-button {
+            margin: 20px 0;
+            font-size: 18px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rock Paper Scissors</h1>
+        <button class="play-button" onclick="startGame()">Click to Play</button>
+        <div class="choices">
+            <button id="rock">✊</button>
+            <button id="paper">✋</button>
+            <button id="scissors">✌</button>
+        </div>
+        <div class="scores">
+            <div>User Score: <span id="userScore">0</span></div>
+            <div>Computer Score: <span id="computerScore">0</span></div>
+        </div>
+        <div class="result" id="result">Game Started</div>
+    </div>
+
+    <script>
+        const choices = ["rock", "paper", "scissors"];
+        let userScore = 0;
+        let computerScore = 0;
+
+        function startGame() {
+            document.querySelector('.choices').style.display = 'flex';
+            document.querySelector('.play-button').style.display = 'none';
+        }
+
+        document.querySelectorAll('.choices button').forEach(button => {
+            button.addEventListener('click', () => {
+                const userChoice = button.id;
+                const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+                const result = determineWinner(userChoice, computerChoice);
+
+                document.getElementById('result').innerText = `User chose ${userChoice}, Computer chose ${computerChoice}. ${result}`;
+                document.getElementById('userScore').innerText = userScore;
+                document.getElementById('computerScore').innerText = computerScore;
+            });
+        });
+
+        function determineWinner(user, computer) {
+            if (user === computer) {
+                return "It's a tie!";
+            } else if ((user === "rock" && computer === "scissors") ||
+                       (user === "paper" && computer === "rock") ||
+                       (user === "scissors" && computer === "paper")) {
+                userScore++;
+                return "User wins!";
+            } else {
+                computerScore++;
+                return "Computer wins!";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+

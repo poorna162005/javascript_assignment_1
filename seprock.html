@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: #dff0d8;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .choices img {
+            width: 100px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .scores {
+            margin: 20px 0;
+        }
+        .result {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rock Paper Scissors</h1>
+        <div class="choices">
+            <img src="	&#9995;" alt="Rock" id="rock">
+            <img src="paper.png" alt="Paper" id="paper">
+            <img src="scissors.png" alt="Scissors" id="scissors">
+        </div>
+        <div class="scores">
+            <p>User Score: <span id="userScore">0</span></p>
+            <p>Computer Score: <span id="computerScore">0</span></p>
+        </div>
+        <div class="result" id="result">Game Started</div>
+    </div>
+
+    <script>
+        const choices = ["rock", "paper", "scissors"];
+        let userScore = 0;
+        let computerScore = 0;
+
+        document.querySelectorAll('.choices img').forEach(img => {
+            img.addEventListener('click', () => {
+                const userChoice = img.id;
+                const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+                const result = determineWinner(userChoice, computerChoice);
+
+                document.getElementById('result').innerText = `User chose ${userChoice}, Computer chose ${computerChoice}. ${result}`;
+                document.getElementById('userScore').innerText = userScore;
+                document.getElementById('computerScore').innerText = computerScore;
+            });
+        });
+
+        function determineWinner(user, computer) {
+            if (user === computer) {
+                return "It's a tie!";
+            } else if ((user === "rock" && computer === "scissors") ||
+                       (user === "paper" && computer === "rock") ||
+                       (user === "scissors" && computer === "paper")) {
+                userScore++;
+                return "User wins!";
+            } else {
+                computerScore++;
+                return "Computer wins!";
+            }
+        }
+    </script>
+</body>
+</html>
